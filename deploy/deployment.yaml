@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logmetrics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: logmetrics
+  template:
+    metadata:
+      labels:
+        name: logmetrics
+    spec:
+      serviceAccountName: logmetrics
+      containers:
+        - name: logmetrics
+          image: ricoberger/logmetrics:0.1.0
+          args:
+            - --config=/etc/logmetrics/config.yaml
+            - --incluster
+          ports:
+            - name: metrics
+              containerPort: 9748
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: metrics
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: metrics
+          volumeMounts:
+            - name: config
+              mountPath: /etc/logmetrics
+      volumes:
+        - name: config
+          configMap:
+            name: logmetrics

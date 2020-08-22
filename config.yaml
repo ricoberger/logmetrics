@@ -1,0 +1,19 @@
+- name: logmetrics_errors_total
+  namespace: logmetrics
+  selector: name=logmetrics
+  parser:
+    type: regexp
+    regexp: ^ERRO.*$
+- name: flux_fail_to_autorelease_contains_total
+  namespace: flux
+  selector: app=flux
+  parser:
+    type: contains
+    keywords:
+      - fail to auto-release
+- name: flux_fail_to_autorelease_regexp_total
+  namespace: flux
+  selector: app=flux
+  parser:
+    type: regexp
+    regexp: .*fail to auto-release.*

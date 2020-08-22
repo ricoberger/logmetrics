@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logmetrics
+data:
+  config.yaml: |
+    - name: logmetrics_errors_total
+      namespace: logmetrics
+      selector: name=logmetrics
+      parser:
+        type: regexp
+        regexp: ^ERRO.*$

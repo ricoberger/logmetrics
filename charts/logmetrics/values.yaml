@@ -1,0 +1,65 @@
+# Default values for logmetrics.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: ricoberger/logmetrics
+  tag: 0.1.0
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+rbac:
+  # Specifies whether a cluster role and cluster role binding should be created.
+  create: true
+  # The name of the cluster role and cluster role binding to use.
+  # If not set and create is true, a name is generated using the fullname template.
+  name:
+
+serviceAccount:
+  # Specifies whether a service account should be created.
+  create: true
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template.
+  name:
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Specifies the configuration which should be used for logmetrics.
+config: |
+  - name: logmetrics_errors_total
+    namespace: logmetrics
+    selector: name=logmetrics
+    parser:
+      type: regexp
+      regexp: ^ERRO.*$
+
+# Specifies if a service monitor for the Prometheus Operator should be created and the
+# settings of this service monitor.
+serviceMonitor:
+  create: false
+  labels: {}
+  interval: 10s
+  scrapeTimeout: 10s
+  honorLabels: true
+  relabelings: []
