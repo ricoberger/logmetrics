@@ -46,13 +46,7 @@ tolerations: []
 affinity: {}
 
 # Specifies the configuration which should be used for logmetrics.
-config: |
-  - name: logmetrics_errors_total
-    namespace: logmetrics
-    selector: name=logmetrics
-    parser:
-      type: regexp
-      regexp: ^ERRO.*$
+config:
 
 # Specifies if a service monitor for the Prometheus Operator should be created and the
 # settings of this service monitor.

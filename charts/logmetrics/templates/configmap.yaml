@@ -4,9 +4,6 @@ metadata:
   name: {{ include "logmetrics.fullname" . }}
 data:
   config.yaml: |
-    - name: logmetrics_errors_total
-      namespace: logmetrics
-      selector: name=logmetrics
-      parser:
-        type: regexp
-        regexp: ^ERRO.*$
+{{- if .Values.config }}
+{{ tpl .Values.config . | indent 4 }}
+{{- end }}
