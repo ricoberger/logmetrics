@@ -1,4 +1,4 @@
-name: docker
+name: Docker
 
 on:
   push:
@@ -32,4 +32,4 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: ricoberger/logmetrics
-          tags: ${{env.DOCKER_TAGS}}
+          tags: ${{env.DOCKER_TAG}}
