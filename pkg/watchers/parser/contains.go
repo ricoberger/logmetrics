@@ -5,6 +5,8 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
+
+	log "github.com/sirupsen/logrus"
 )
 
 // Contains defines the structure of a contains parser
@@ -34,6 +36,7 @@ func (p *Contains) Parse(podName, podNamespace string, logLine []byte) (bool, er
 		}
 	}
 
+	log.Debugf("Logline match: %s", logLine)
 	p.metricCounter.With(prometheus.Labels{"type": metricMatchedType, "pod_namespace": podNamespace, "pod_name": podName}).Inc()
 	return true, nil
 }
