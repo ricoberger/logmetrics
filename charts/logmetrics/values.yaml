@@ -27,6 +27,10 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template.
   name:
 
+# Set the log level. 
+# Must be one of the follwing values: trace, debug, info, warn, error, fatal or panic.
+logLevel: info
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little

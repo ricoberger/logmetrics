@@ -28,6 +28,7 @@ spec:
           args:
             - --config=/etc/logmetrics/config.yaml
             - --incluster
+            - --log.level={{ .Values.logLevel }}
           ports:
             - name: metrics
               containerPort: 9748
